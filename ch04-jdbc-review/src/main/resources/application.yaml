@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bjpowernode?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 1870168452
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database: mysql
+    show-sql: true
+    generate-ddl: true

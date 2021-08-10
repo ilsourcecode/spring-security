@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyw.mapper.SysUserMapper">
+
+    <resultMap id="SysUserMapper" type="com.lyw.entities.SysUser">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="realname" property="realName"/>
+        <result column="islock" property="isLock"/>
+        <result column="isenable" property="isEnable"/>
+        <result column="iscredentials" property="isCredentials"/>
+        <result column="createtime" property="createTime"/>
+        <result column="logintime" property="loginTime"/>
+        <result column="isexpired" property="isExpired"/>
+    </resultMap>
+
+    <insert id="insertUser">
+        insert into
+            sys_user(username, password, realname,
+            isenable, isexpired, islock, iscredentials, createtime, logintime)
+        values
+            (#{username}, #{password}, #{realName},
+            #{isEnable}, #{isExpired}, #{isLock},
+            #{isCredentials}, #{createTime}, #{loginTime})
+    </insert>
+
+    <select id="selectUserByUsername" resultMap="SysUserMapper" >
+        select
+            id, username, password, realname, isenable, isexpired, islock, iscredentials, createtime, logintime
+        from
+            sys_user
+        where
+            username = #{username}
+    </select>
+
+</mapper>

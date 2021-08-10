@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录页面</title>
+  <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+  <script>
+    $(function () {
+      // Jquery 的入口函数
+
+      $("#btn").click(function() {
+        alert("click!");
+
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var captcha = $("#code").val();
+
+        $.ajax({
+          url: "/login",
+          method: "POST",
+          data: {
+            "username": username,
+            "password": password,
+            "captcha": captcha
+          },
+          dataType: "json",
+          success: function (responseText){
+            alert(responseText.meg);
+          }
+        })
+      })
+
+      $("#updateCaptcha").click(function () {
+        // new Date() 浏览器不是用缓存，每次获取新的内容
+        var url = "/captcha/code?t=" + new Date();
+        $("#captchaImg").attr("src", url);
+      })
+    })
+  </script>
+</head>
+<body>
+<p>前后端分离的，基于 Json 实现</p>
+username <input type="text" id="username" /><br>
+password <input type="password" id="password" /><br>
+<!-- 验证码图像 -->
+<a id="updateCaptcha" href="javascript:void(0)">
+  <img id="captchaImg" src="/captcha/code" alt="">
+</a>
+<br />
+captcha <input type="text" id="code" value=""> <br />
+<br />
+<button id="btn">使用Ajax登录</button>
+</body>
+</html>

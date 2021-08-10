@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+  <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  username: <input type="text" id="username" /><br />
+  password: <input type="password" id="password"/><br />
+  captcha：<input type="text" id="captcha" size="6"/> ：
+  <a id="captchaUpdate" href="javascript:void(0)">
+    <img id="captchaImg" src="/captcha" alt="">
+  </a>
+  <br />
+  <button id="btn">提交</button>
+
+  <script>
+    $(function () {
+      $("#btn").click(function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var captcha = $("#captcha").val();
+        $.ajax({
+          method: "post",
+          url: "/login",
+          dataType: "json",
+          data: {
+            username: username,
+            password: password,
+            captcha: captcha
+          },
+          success: function(responseText) {
+            alert(responseText.meg);
+          }
+        })
+      })
+
+      $("#captchaUpdate").click(function() {
+        var url = "/captcha?t=" + new Date();
+        $("#captchaImg").attr("src", url);
+      })
+    })
+</script>
+</body>
+</html>
